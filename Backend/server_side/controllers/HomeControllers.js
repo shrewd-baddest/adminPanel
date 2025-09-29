@@ -99,8 +99,7 @@ WHERE sale_items.created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW() AND sale_i
     const [expenses]=await pool.query(sql2,productIds);
      const cost=expenses[0].total_cost|| 0;
    const profit= totalIncome-cost>0?totalIncome-cost:0;
-   
-    res.status(200).json([{name:'Income',value:totalIncome},{name:'expenses',value:cost},{name:'profit',value:profit}]);
+     res.status(200).json([{name:'Income',value:totalIncome},{name:'expenses',value:cost},{name:'profit',value:profit}]);
 
 }
 catch(error){
