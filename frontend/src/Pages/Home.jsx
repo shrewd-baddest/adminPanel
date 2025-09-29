@@ -7,7 +7,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
-import { Bars3Icon, XMarkIcon,CogIcon,HomeIcon,UsersIcon,ShoppingCartIcon,ChartBarIcon } from '@heroicons/react/24/outline' 
+import { Bars3Icon, XMarkIcon,CogIcon,HomeIcon,UserIcon,ShoppingCartIcon,ChartBarIcon } from '@heroicons/react/24/outline' 
 import DoughnutChart from '../Charts/DoughnutCharts';
 const Home = () => {
   const products=useLoaderData()
@@ -20,8 +20,8 @@ const Home = () => {
   const [summarised,setSummarised]=useState([]);
   const token=localStorage.getItem('token');
   const catalog=[{name:'Dashboard', icon:HomeIcon}, 
-    {name:'Inventory',icon:ShoppingCartIcon},{name:'Sales',icon:ChartBarIcon},{name:'Reports', icon: ChartBarIcon},
-    {name:'Customers',icon:UsersIcon},{name: 'Settings',icon:CogIcon}];
+    {name:'Inventory',icon:ShoppingCartIcon},{name:'Sales',icon:ChartBarIcon},{name:'Reports', icon: ChartBarIcon},{name:'staff',icon:UserIcon},
+    {name:'Customers',icon:UserIcon},{name: 'Settings',icon:CogIcon}];
     useEffect(
     ()=>{
 const summary = async () => {
@@ -98,7 +98,7 @@ ease:'elastic.inOut',
 
           {catalog.map((item, index) => (
             <li className="card" key={index}>
-              <Link to={`/${item.name.toLowerCase()}`}>
+              <Link to={`/dashboard/${item.name.toLowerCase()}`}>
               <item.icon className='inline h-4 w-4'/>
               {item.name} <span>&gt;</span></Link>
             </li>
@@ -110,8 +110,8 @@ ease:'elastic.inOut',
 
           {catalog.map((item, index) => (
             <li className="card" key={index}>
-<Link to={`/${item.name.toLowerCase()}`}>
-  <item.icon className="inline h-4 w-4 md:hidden" />
+<Link to={`/dashboard/${item.name.toLowerCase()}`}>
+  <item.icon className="inline h-4 w-4 md:hidden" title={item.name} />
   <div className={`md:hidden ${open ? 'grid' : 'hidden'} grid-cols-1 gap-4 p-4`}>
   {item.name} <span>&gt;</span>
   </div>
@@ -154,7 +154,7 @@ summarised.map((item, index) => (
      <p className='price'>Ksh:{product.price}</p>
       
               </div>
-           ) )) : ( <p>No products found or fetch failed.</p>
+           ) )) : ( <p>No products found  </p>
           //  {alert('please log in again')}
 )}
           </div>

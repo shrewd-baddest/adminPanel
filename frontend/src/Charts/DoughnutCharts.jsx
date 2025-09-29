@@ -14,7 +14,7 @@ const DoughnutChart = () => {
     const [labels,setLabels]=useState([]);
     const [values,setValues]=useState([]);
     useEffect(() => {
-        fetch('http://localhost:3000/pages/chart-data')
+        fetch('http://localhost:3000/pages/chart-data',{headers:{Authorization: `Bearer ${localStorage.getItem('token')}`}})
         .then(res=>res.json())
          .then(data => {
         const names = data.map(item => item.name);
@@ -25,8 +25,7 @@ const DoughnutChart = () => {
        .catch(err => console.error('Failed to fetch chart data:', err));
   }, []);
   
-  console.log('Labels:', labels);
-console.log('Values:', values);
+ console.log(values);
 
   const data2 = {
     labels:labels,

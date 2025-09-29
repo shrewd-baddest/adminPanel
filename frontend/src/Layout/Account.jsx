@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import '../styling/Body.css'
+import '../styling/login.css'
 const Account = () => {
   return (
     <div>

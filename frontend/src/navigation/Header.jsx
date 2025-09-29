@@ -49,10 +49,10 @@ navigate(`/home/search?q=${encodeURIComponent(search)}`);
       <BellIcon style={{height:'2rem'}}/>
      </Link></li>
       </ul>
-      <button onClick={()=>{navigate('/login')}} className='sign-up'>Sign Up</button>
+      <button onClick={()=>{navigate('/')}} className='sign-up'>Sign Up</button>
       </div>
       <div style={{margin:'0.6%',paddingLeft:'8%',fontSize:'1.2rem'}}>
-  <Link to={'/home'} style={{textDecoration:'none'}}>Home</Link>
+  <Link to={'/dashboard'} style={{textDecoration:'none'}}>Home</Link>
  {
   paths.slice(1).map((path, index) => {
     const fullPath = `/${paths.slice(0, index + 2).join('/')}`;

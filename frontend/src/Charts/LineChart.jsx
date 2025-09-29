@@ -17,7 +17,7 @@ const LineChart = () => {
     const [labels,setLabels]=useState([]);
     const [values,setValues]=useState([]);
     useEffect(() => {
-        fetch('http://localhost:3000/pages/sales')
+        fetch('http://localhost:3000/pages/sales',{headers:{Authorization: `Bearer ${localStorage.getItem('token')}`}})
         .then(res=>res.json())
              .then(data => {
         const names = data.map(item => item.name);

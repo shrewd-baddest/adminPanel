@@ -34,10 +34,12 @@ input{
 input[type="text"]{
     background-color: burlywood;
     color:white;
+    padding-left:2%;
 }
-input[type="password"]{
+input[type="password"],[type="email"]{
     border-radius:10px;
     background-color: burlywood;
+       padding-left:3%;
 
 }
 .google{
