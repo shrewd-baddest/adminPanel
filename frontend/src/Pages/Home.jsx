@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from 'react'
-import { Link, useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData, useLocation } from 'react-router-dom'
 import LineChart from '../Charts/LineChart';
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,6 +11,9 @@ import { Bars3Icon, XMarkIcon,CogIcon,HomeIcon,UserIcon,ShoppingCartIcon,ChartBa
 import DoughnutChart from '../Charts/DoughnutCharts';
 const Home = () => {
   const products=useLoaderData()
+  const location=useLocation()
+  const path=location.pathname;
+  const site=path.split('/').filter(Boolean);
   console.log(products);
   const [open, setOpen] = useState(false);
   const [revenue,setRevenue]=useState(0);
@@ -67,12 +70,12 @@ const summary = async () => {
           
         }
       }).fromTo('.most_sold',{
-    x:-100,
+    x:200,
 opacity:0,
 ease:'elastic.inOut',
   stagger:{
       axis:'x',
-    grid:'auto',
+    grid:'auto',  
     each:2
   }
 } ,
@@ -89,33 +92,51 @@ ease:'elastic.inOut',
         className='focus:outline-none'
         onClick={() => setOpen(!open)}
       >
-        {open ? <XMarkIcon className="h-6 w-6" /> : <Bars3Icon className="h-6 w-6" />}
+        {open ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
       </button>
 
       <div className="grp">
         <section className="catalog">
-          <ul className='categories hidden md:grid '>
+          <ul className='hidden categories md:grid '>
 
           {catalog.map((item, index) => (
-            <li className="card" key={index}>
-              <Link to={`/dashboard/${item.name.toLowerCase()}`}>
-              <item.icon className='inline h-4 w-4'/>
+                 <li className="card" key={index}>
+            {  item.name=='Dashboard'?(
+
+              <Link to={site[site.length-1]=='dashboard'?'':`/dashboard/${item.name.toLowerCase()}`}>
+              <item.icon className='inline w-4 h-4'/>
               {item.name} <span>&gt;</span></Link>
+            )
+             :(
+                 <Link to={`/dashboard/${item.name.toLowerCase()}`}>
+              <item.icon className='inline w-4 h-4'/>
+              {item.name} <span>&gt;</span></Link> 
+              )}
             </li>
           ))}
           </ul>
           <div>
 
-<ul className='categories grid'>
+<ul className='grid categories'>
 
           {catalog.map((item, index) => (
-            <li className="card" key={index}>
-<Link to={`/dashboard/${item.name.toLowerCase()}`}>
-  <item.icon className="inline h-4 w-4 md:hidden" title={item.name} />
+                 <li className="card" key={index}>
+            {  item.name=='Dashboard'?(
+
+              <Link to={site[site.length-1]=='dashboard'?'':`/dashboard/${item.name.toLowerCase()}`}>
+              <item.icon className="inline w-4 h-4 md:hidden" title={item.name} />
   <div className={`md:hidden ${open ? 'grid' : 'hidden'} grid-cols-1 gap-4 p-4`}>
   {item.name} <span>&gt;</span>
-  </div>
-</Link>            </li>
+  </div></Link>
+            )
+             :(
+                 <Link to={`/dashboard/${item.name.toLowerCase()}`}>
+               <item.icon className="inline w-4 h-4 md:hidden" title={item.name} />
+  <div className={`md:hidden ${open ? 'grid' : 'hidden'} grid-cols-1 gap-4 p-4`}>
+  {item.name} <span>&gt;</span>
+  </div></Link> 
+              )}
+            </li>
           ))}
           </ul>
           </div>
@@ -143,13 +164,15 @@ summarised.map((item, index) => (
             <LineChart key='linechart'/>
           </div>
           </div>
+          <div className='most_sold_products '>
+            <h2 className='font-bold ' style={{textAlign:"left",marginLeft:"2%"}}>Most Sold Products</h2>
+          </div>
           <div className='mostSold'>
-            <h2 style={{textAlign:'center'}}>Most Sold Products</h2>
             {
      Array.isArray(products) ? ( products.map((product)=>(
               <div key={product.products_id} className='most_sold'>
  <img 
-     src={product.image_url} loading="lazy" />
+     src={product.image_url} loading="lazy" className='most-sold-Image'/>
      <p> {product.products_name} </p><p className='quant'>{product.weight_ml} ml</p>
      <p className='price'>Ksh:{product.price}</p>
       
