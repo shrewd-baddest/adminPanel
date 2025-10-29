@@ -14,7 +14,7 @@ app.use('/pages',router);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const frontendPath = path.join(__dirname, '../../frontend/dist');
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT || 3000;
 app.use(express.static(frontendPath));
 app.get(/.*/, (req, res) => {
   res.sendFile(path.join(frontendPath, 'index.html'));
