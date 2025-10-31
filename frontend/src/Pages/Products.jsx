@@ -15,7 +15,7 @@ const Products = () => {
   const [supplierId,setSupplierId]=useState('');
   useEffect(()=>{
 const fetchCategory=async()=>{
-  const res=await fetch('http://localhost:3000/pages/category',{headers:{Authorization: `Bearer ${localStorage.getItem('token')}`}})
+  const res=await fetch('https://adminpanel-8j8g.onrender.com/pages/category',{headers:{Authorization: `Bearer ${localStorage.getItem('token')}`}})
   setCategory(await res.json());
 }
   fetchCategory()
@@ -43,7 +43,7 @@ if(!image){
 }
 
 try {
-  const response=await axios.post('http://localhost:3000/pages/supplierItems', formData,
+  const response=await axios.post('https://adminpanel-8j8g.onrender.com/pages/supplierItems', formData,
     {headers:{Authorization: `Bearer ${localStorage.getItem('token')}`}}
   )
 
@@ -61,10 +61,10 @@ try {
     <div className='addProduct'>
       
         <div className='product-nav-bar'>
-        <h1><BriefcaseIcon  className='inline h-6 w-6'/>Add New Product  </h1>
+        <h1><BriefcaseIcon  className='inline w-6 h-6'/>Add New Product  </h1>
        <div className='product-right-bar'>
-        <h4 className='draft'><NewspaperIcon className='inline h-6 w-6'/> save Draf</h4>
-        <button onClick={handleSubmit} className='addproduct-button'><CheckIcon className='inline h-6 w-6'/>Add Product</button> 
+        <h4 className='draft'><NewspaperIcon className='inline w-6 h-6'/> save Draf</h4>
+        <button onClick={handleSubmit} className='addproduct-button'><CheckIcon className='inline w-6 h-6'/>Add Product</button> 
         </div>
         </div>
         <div className='product-grouping'>

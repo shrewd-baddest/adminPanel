@@ -24,7 +24,7 @@ const Sales = () => {
 
       const employees=async()=>{
         try{
-        const employeesData=await axios.get('http://localhost:3000/authority/salesData', 
+        const employeesData=await axios.get('https://adminpanel-8j8g.onrender.com/authority/salesData', 
             {headers:{Authorization: `Bearer ${localStorage.getItem('token')}`}}
           )
           if(employeesData.data.length>0){
@@ -33,7 +33,7 @@ const Sales = () => {
           else{
             alert('no data found');
           }
-          const supplierData=await axios.get('http://localhost:3000/pages/supplierBills', 
+          const supplierData=await axios.get('https://adminpanel-8j8g.onrender.com/pages/supplierBills', 
             {headers:{Authorization: `Bearer ${localStorage.getItem('token')}`}}
           )
           if(supplierData.data.length>0){
@@ -64,7 +64,7 @@ const Sales = () => {
   setQuery(searchValue);
   const getSearch=async()=>{
     try{
-    const response=await axios.post('http://localhost:3000/pages/search',{query},{headers:{Authorization:`Bearer ${token}`}});
+    const response=await axios.post('https://adminpanel-8j8g.onrender.com/pages/search',{query},{headers:{Authorization:`Bearer ${token}`}});
        setSearchProducts(response.data)
      }
     catch(error){

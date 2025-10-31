@@ -29,19 +29,19 @@ const Home = () => {
     ()=>{
 const summary = async () => {
   try {
-    const T_order = await fetch('http://localhost:3000/pages/orders', {
+    const T_order = await fetch('https://adminpanel-8j8g.onrender.com/pages/orders', {
       headers: { Authorization: `Bearer ${token}` },
     });
     const orderData = await T_order.json();
     setOrder(orderData);
 
-    const T_customers = await fetch('http://localhost:3000/pages/customers', {
+    const T_customers = await fetch('https://adminpanel-8j8g.onrender.com/pages/customers', {
       headers: { Authorization: `Bearer ${token}` },
     });
     const customerData = await T_customers.json();
     setCustomers(customerData);
 
-    const T_delivery = await fetch('http://localhost:3000/pages/delivery', {
+    const T_delivery = await fetch('https://adminpanel-8j8g.onrender.com/pages/delivery', {
       headers: { Authorization: `Bearer ${token}` },
     });
     const deliveryData = await T_delivery.json();
@@ -195,7 +195,7 @@ export const most_sold=async()=>{
 
 try{
   const token=localStorage.getItem('token');
-const response=await fetch('http://localhost:3000/pages/MostSold',{
+const response=await fetch('https://adminpanel-8j8g.onrender.com/pages/MostSold',{
   headers:{
     Authorization:`Bearer ${token} `
   }}

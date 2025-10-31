@@ -16,7 +16,7 @@ const [ID,setID] =useState('');
   const handleTest= (e) => {
     
       e.preventDefault();
-const url="http://localhost:3000/authority/regist";
+const url="https://adminpanel-8j8g.onrender.com/authority/regist";
 
   // You can now send the name and email via axios to your server
   if(ID!=''&& email!=''&& name!='' && role!=''&& pCode!=''){

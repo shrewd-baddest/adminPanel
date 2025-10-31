@@ -23,7 +23,7 @@ staffsDetails()
 const staffsDetails=async()=>{
     const token = localStorage.getItem('token');
      try {
- const response=await fetch('http://localhost:3000/pages/staffDetails',{
+ const response=await fetch('https://adminpanel-8j8g.onrender.com/pages/staffDetails',{
   headers:{
     Authorization:`Bearer ${token} `
   }}
@@ -59,7 +59,7 @@ const data=await response.json();
 
   try {
     // 1. Send payment request to backend
-    const res = await axios.post('http://localhost/npm/payment.php', paymentData, {
+    const res = await axios.post('https://adminpanel-8j8g.onrender.com/pages/payment', paymentData, {
           headers: { Authorization: `Bearer ${token}` }});
      if (res.data.status === 'success') {
       // 2. Wait 10 seconds to give M-Pesa time to send callback
@@ -91,9 +91,9 @@ const data=await response.json();
           <div className='inventory_nav-right-tab'>
     <input type='text' placeholder='search' className='inventory_nav-right-tab-search'/>
 <button type="submit" className="inventory_nav-right-tab-button">
-  <MagnifyingGlassIcon className="inline h-4 w-4" />
+  <MagnifyingGlassIcon className="inline w-4 h-4" />
 </button>
-   <p><FunnelIcon className='inline h-4 w-4'/>filter</p>
+   <p><FunnelIcon className='inline w-4 h-4'/>filter</p>
     </div>
            
         </div>

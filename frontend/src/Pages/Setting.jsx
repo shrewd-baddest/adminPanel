@@ -39,7 +39,7 @@ const Setting = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/pages/profile",
+          "https://adminpanel-8j8g.onrender.com/pages/profile",
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const data = response.data;
@@ -55,7 +55,7 @@ const Setting = () => {
       }
     };
     const handleNotification = async () => {
-      await fetch("http://localhost:3000/pages/notifications", {
+      await fetch("https://adminpanel-8j8g.onrender.com/pages/notifications", {
         headers: { Authorization: `Bearer ${token}` },
       })
         .then((res) => res.json())
@@ -84,7 +84,7 @@ const Setting = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/authority/regist",
+        "https://adminpanel-8j8g.onrender.com/authority/regist",
         formData,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -101,7 +101,7 @@ const Setting = () => {
   };
   const renderContent = () => {
     const saveChanges=()=>{
-      axios.post("http://localhost:3000/pages/settings",
+      axios.post("https://adminpanel-8j8g.onrender.com/pages/settings",
         {language,theme,isSwitchOn,fontSize,isSoundOn,volume,isAutoUpdateOn},
         {headers:{Authorization:`Bearer ${token}`}});}
     
@@ -314,7 +314,7 @@ const Setting = () => {
 case "notification": {
 
   const handleSubmit=()=>{
-    axios.post("http://localhost:3000/pages/notifications",{query},{headers:{Authorization:`Bearer ${token}`}})
+    axios.post("https://adminpanel-8j8g.onrender.com/pages/notifications",{query},{headers:{Authorization:`Bearer ${token}`}})
   }
   return (
     <>

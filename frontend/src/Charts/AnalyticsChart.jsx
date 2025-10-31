@@ -10,7 +10,7 @@ ChartJS.register(CategoryScale,ArcElement,
       export  const AnalyticsChart = () => {
            const [chartData, setChartData] = useState([]);
           useEffect(() => {
-        fetch('http://localhost:3000/pages/salesTrends',{headers:{Authorization: `Bearer ${localStorage.getItem('token')}`}})
+        fetch('https://adminpanel-8j8g.onrender.com/pages/salesTrends',{headers:{Authorization: `Bearer ${localStorage.getItem('token')}`}})
         .then(res=>res.json())
                 .then(data => {
                     setChartData(data);
@@ -69,7 +69,7 @@ ChartJS.register(CategoryScale,ArcElement,
 
     const category=async()=>{
         try {
-          const response = await fetch("http://localhost:3000/pages/productTypes", {
+          const response = await fetch("https://adminpanel-8j8g.onrender.com/pages/productTypes", {
             headers: {
               Authorization: `Bearer ${localStorage.getItem('token')}`
             }

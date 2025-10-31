@@ -43,7 +43,7 @@ if (blurs.current){
   const okDelete = async () => {
     try {
       const res = await axios.post(
-        'http://localhost:3000/pages/deleteProduct',
+        'https://adminpanel-8j8g.onrender.com/pages/deleteProduct',
         { productId: productToDelete },
         {
           headers: {
@@ -87,7 +87,7 @@ if(search!==''){
 setQuery(searchValue);
 const getSearch=async()=>{
   try{
-  const response=await axios.post('http://localhost:3000/pages/search',{query},{headers:{Authorization:`Bearer ${token}`}});
+  const response=await axios.post('https://adminpanel-8j8g.onrender.com/pages/search',{query},{headers:{Authorization:`Bearer ${token}`}});
      setSearchProducts(response.data)
    }
   catch(error){
@@ -138,10 +138,10 @@ const getSearch=async()=>{
 <div className='inventory_nav-right-tab'>
     <input type='text' placeholder='search' className='inventory_nav-right-tab-search' onChange={(e)=>{setSearch(e.target.value)}}/>
 <button type="submit" className="inventory_nav-right-tab-button" onClick={()=>{handleSearch}}>
-  <MagnifyingGlassIcon className="inline h-4 w-4" />
+  <MagnifyingGlassIcon className="inline w-4 h-4" />
 </button>
 
-    <p><FunnelIcon className='inline h-4 w-4'/>filter</p>
+    <p><FunnelIcon className='inline w-4 h-4'/>filter</p>
     </div>
     </section>
    <section className='inventory-list'>
@@ -166,10 +166,10 @@ searchProducts.length>0?(
           <p className='weight'>{searchProduct.weight_ml}</p>
           <div className='action'>
             <button>
-              <PencilIcon className='inline h-4 w-4' />
+              <PencilIcon className='inline w-4 h-4' />
             </button>
             <button onClick={() => deleting(searchProduct.products_id)}>
-              <TrashIcon className='inline h-4 w-4' />
+              <TrashIcon className='inline w-4 h-4' />
             </button>
           </div>
           <hr />
@@ -187,10 +187,10 @@ details.length > 0 ? (
           <p className='weight'>{detail.weight_ml}</p>
           <div className='action'>
             <button>
-              <PencilIcon className='inline h-4 w-4' />
+              <PencilIcon className='inline w-4 h-4' />
             </button>
             <button onClick={() => deleting(detail.products_id)}>
-              <TrashIcon className='inline h-4 w-4' />
+              <TrashIcon className='inline w-4 h-4' />
             </button>
           </div>
           <hr />
@@ -231,7 +231,7 @@ export default Inventory
 export const productsDetails=async()=>{
     const token = localStorage.getItem('token');
      try {
- const response=await fetch('http://localhost:3000/pages/productDetails',{
+ const response=await fetch('https://adminpanel-8j8g.onrender.com/pages/productDetails',{
   headers:{
     Authorization:`Bearer ${token} `
   }}

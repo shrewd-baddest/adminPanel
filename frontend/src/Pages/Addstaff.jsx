@@ -36,7 +36,7 @@ formData.append('email', email);
 }
 
 try {
-  const response=await axios.post('http://localhost:3000/authority/regist', formData,
+  const response=await axios.post('https://adminpanel-8j8g.onrender.com/authority/regist', formData,
     {headers:{Authorization: `Bearer ${localStorage.getItem('token')}`}}
   )
 

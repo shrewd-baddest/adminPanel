@@ -18,7 +18,7 @@ const ActivityChart = () => {
   const [labels,setLabels]=useState([]);
       const [values,setValues]=useState([]);
       useEffect(() => {
-          fetch('http://localhost:3000/pages/revenue')
+          fetch('https://adminpanel-8j8g.onrender.com/pages/revenue')
           .then(res=>res.json())
              .then(data => {
         const names = Object.keys(data);

@@ -12,7 +12,7 @@ const Report = () => {
     useEffect(
     ()=>{
 const overviews=async()=>{
-    const T_order = await fetch('http://localhost:3000/pages/sales', {
+    const T_order = await fetch('https://adminpanel-8j8g.onrender.com/pages/sales', {
       headers: { Authorization: `Bearer ${token}` }
     });
     const salesData = await T_order.json();
@@ -47,7 +47,7 @@ const overviews=async()=>{
         // break;
       case 'Analytics':
         {
-          fetch("http://localhost:3000/pages/revenue", {
+          fetch("https://adminpanel-8j8g.onrender.com/pages/revenue", {
                 headers: { Authorization: `Bearer ${token}` },
               }).then(response =>
                response.json()).then(data => {
@@ -77,7 +77,7 @@ case "Data Export":
   {
   const salesPDF = async () => {
     try {
-      const response = await fetch("http://localhost:3000/pages/salesReport", {
+      const response = await fetch("https://adminpanel-8j8g.onrender.com/pages/salesReport", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const Sreport=await response.json();

@@ -18,7 +18,7 @@ backgroundSize: 'cover',
   };
 
   const buton = 'Login';
-  const url = 'http://localhost:3000/authority/login';
+  const url = 'https://adminpanel-8j8g.onrender.com/authority/login';
 
   const navigate = useNavigate();
 
