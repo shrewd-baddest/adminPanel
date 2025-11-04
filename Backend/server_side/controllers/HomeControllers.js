@@ -70,41 +70,58 @@ export const chartTable = async (req, res) => {
     }
 };
 
-export const sales=async(req,res)=>{
-    const sql1=`SELECT 
-  SUM(sale_items.quantity * sale_items.price) AS total_price,GROUP_CONCAT(DISTINCT product_id) AS ids
-FROM 
-  sale_items
-WHERE 
-  sale_items.created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW();`
-try{
-    const [rows]=await pool.query(sql1);
+export const sales = async (req, res) => {
+  const sql1 = `
+    SELECT 
+      SUM(sale_items.quantity * sale_items.price) AS total_price,
+      GROUP_CONCAT(DISTINCT product_id) AS ids
+    FROM sale_items
+    WHERE sale_items.created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW();
+  `;
+
+  try {
+    const [rows] = await pool.query(sql1);
     const totalIncome = rows[0]?.total_price || 0;
-    const productIds=rows[0].ids.split(',').filter(id => id.trim() !== '');
-     if (productIds.length === 0) {
-    return res.status(200).json([
-      { name: 'Income', value: 0 },
-      { name: 'Expenses', value: 0 },
-      { name: 'Profit', value: 0 }
+    const ids = rows[0]?.ids;
+const productIds = ids ? ids.split(',').filter(id => id.trim() !== '') : [];
+
+
+    // If there are no products sold in last 30 days
+    if (productIds.length === 0) {
+      return res.status(200).json([
+        { name: 'Income', value: 0 },
+        { name: 'Expenses', value: 0 },
+        { name: 'Profit', value: 0 }
+      ]);
+    }
+
+     const placeholders = productIds.map(() => '?').join(',');
+
+    const sql2 = `
+      SELECT 
+        SUM(supplier_items.price * sale_items.quantity) AS total_cost 
+      FROM products
+      JOIN supplier_items ON products.supplier_item_id = supplier_items.supplier_item_id
+      JOIN sale_items ON products.products_id = sale_items.product_id
+      WHERE sale_items.created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW()
+        AND sale_items.product_id IN (${placeholders});
+    `;
+
+    const [expenses] = await pool.query(sql2, productIds);
+    const totalCost = expenses[0]?.total_cost || 0;
+    const profit = Math.max(totalIncome - totalCost, 0);
+
+    res.status(200).json([
+      { name: 'Income', value: totalIncome },
+      { name: 'Expenses', value: totalCost },
+      { name: 'Profit', value: profit }
     ]);
+  } catch (error) {
+    console.error('Error calculating sales summary:', error);
+    res.status(500).json({ message: error.message });
   }
+};
 
-   const placeholder=productIds.map(()=>'?').join(',');
-
-const sql2=`select SUM( supplier_items.price * sale_items.quantity) AS total_cost FROM products
-JOIN supplier_items ON products.supplier_item_id = supplier_items.supplier_item_id
-JOIN sale_items ON products.products_id = sale_items.product_id
-WHERE sale_items.created_at BETWEEN NOW() - INTERVAL 30 DAY AND NOW() AND sale_items.product_id =${placeholder};`
-    const [expenses]=await pool.query(sql2,productIds);
-     const cost=expenses[0].total_cost|| 0;
-   const profit= totalIncome-cost>0?totalIncome-cost:0;
-     res.status(200).json([{name:'Income',value:totalIncome},{name:'expenses',value:cost},{name:'profit',value:profit}]);
-
-}
-catch(error){
-    res.status(500).json({message:error.message});
-}
-     }
      
 export const MostSold = async (req, res) => {
   const sql = `
