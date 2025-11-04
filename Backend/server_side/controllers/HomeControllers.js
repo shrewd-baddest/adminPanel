@@ -64,8 +64,7 @@ export const chartTable = async (req, res) => {
             getCount('orders', 'order_date', 'Total Orders'),
             getCount('sales', 'created_at', 'Total Deliveries')
         ]);
-       console.log(`labels:${chart}`);
-        res.status(200).json(chart);
+         res.status(200).json(chart);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

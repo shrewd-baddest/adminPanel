@@ -1,8 +1,7 @@
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
 dotenv.config();
-console.log("DB HOST:", process.env.DB_HOST);
-console.log("DB USER:", process.env.DB_USER);
+ 
 const dbConfig = {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
