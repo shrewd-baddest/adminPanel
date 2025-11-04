@@ -14,7 +14,7 @@ import jwt from "jsonwebtoken";
 
 const decoded = jwt.verify(token, process.env.SECRET_KEY);
     req.user = decoded;
-    // console.log(req.user);
+    console.log(req.user.id);
      next();
   } catch (err) {
     return res.status(401).json({ message: "Invalid or expired token" });
