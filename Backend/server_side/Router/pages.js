@@ -12,6 +12,7 @@ import {revenue} from '../controllers/Report.js'
 import {salesReport,salesTrends,productTypes} from '../controllers/Report.js'
 import { getSettings } from '../controllers/SettingsController.js';
 import { getNotifications } from '../controllers/Notification.js';
+import { customersDetails } from '../controllers/Customers.js';
 router.get('/orders',verifyToken, order);
 router.get('/customers',verifyToken, customers);
 router.get('/delivery',verifyToken,delivery);
@@ -31,4 +32,5 @@ router.get('/salesTrends',salesTrends);
 router.get('/productTypes',productTypes);
 router.get('/profile',verifyToken,getSettings);
 router.get('/notifications',getNotifications);
+router.get('/customersDetails',customersDetails);
 export default router;

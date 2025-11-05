@@ -3,6 +3,7 @@ import React, { Suspense, lazy } from 'react';
  import { createBrowserRouter, createRoutesFromElements, Route,RouterProvider } from 'react-router-dom'
   import  { most_sold } from './Pages/Home.jsx'
   import {productsDetails} from './Pages/Inventory.jsx'
+import { customersDetails } from './Pages/Customers.jsx';
   const Home = lazy(() => import('./Pages/Home.jsx'));
 const Login = lazy(() => import('./Pages/Login.jsx'));
 const Regist = lazy(() => import('./Pages/Regist.jsx'));
@@ -14,6 +15,7 @@ const Staff=lazy(()=>import('./Pages/Staff.jsx'));
 const Addstaff=lazy(()=>import('./Pages/Addstaff.jsx'))
 const Sales=lazy(()=>import('./Pages/Sales.jsx'))
 const Report=lazy(()=>import('./Pages/Report.jsx'))
+const Customers=lazy(()=>import('./Pages/Customers.jsx'));
 const Setting=lazy(()=>import('./Pages/Setting.jsx'))
 const LoadingFallback = () => <div className="spinner">⏳ Please wait...</div>;
   const App = () => {
@@ -33,7 +35,7 @@ const router=createBrowserRouter(
    <Route path='sales'  element={<Sales/>} />
    < Route path='reports' element={<Report />}/>
    <Route path='settings' element={<Setting />}/>
-
+   <Route path='customers' element={<Customers />} loader={customersDetails}/>
      </Route>
    </>
     
