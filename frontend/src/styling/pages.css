@@ -24,7 +24,7 @@ body {
     display:grid;
     grid-template-columns:auto;
    }
- .home,.inventory,.addProduct,.reports,.settings{
+ .home,.inventory,.addProduct,.reports,.settings,.customers{
   position: relative;
   border-radius: 16px;
   padding-left:2%;
