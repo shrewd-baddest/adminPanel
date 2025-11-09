@@ -39,14 +39,17 @@ CREATE TABLE products(
       category_id INT,  -- Add this line to define the FK column
 FOREIGN KEY(categories_id) REFERENCES category(category_id));
 FOREIGN KEY (supplyer_item_id) REFERENCES supplier_items(supplyer_item_id),
+
 CREATE TABLE ORDERS(
   id int AUTO_INCREMENT primary KEY,
    user_id int,
+   MID varchar(255,
    total_price decimal(10,2),
     order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    statuz varchar(100)  ,
+    statuz varchar(100) DEFAULT 'pending',
       CONSTRAINT chk_statuz CHECK (statuz IN ('pending', 'paid', 'cancelled', 'refunded')),
-    FOREIGN KEY(user_id) REFERENCES person(id)
+    FOREIGN KEY(user_id) REFERENCES person(id),
+    FOREIGN KEY(MID) REFERENCES mpesa_request(checkout_id)
 );
 
 CREATE TABLE ORDER_ITEMS( 
@@ -121,4 +124,14 @@ CREATE TABLE settings (
   theme VARCHAR(50) DEFAULT 'light',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES users(id)
+);
+CREATE TABLE mpesa_request(
+  checkout_id VARCHAR(255) PRIMARY KEY,
+  user_id INT,
+  amount DECIMAL(10,2),
+  productId INT,
+  status VARCHAR(255) DEFAULT 'pending',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES person(ID),
+  FOREIGN KEY (product_id) REFERENCES products(products_id)
 );

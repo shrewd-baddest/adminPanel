@@ -20,7 +20,7 @@ router.get('/delivery',verifyToken,delivery);
 router.get('/sales',verifyToken,sales);
 router.get('/MostSold',verifyToken,MostSold);
 router.get('/productDetails',verifyToken,productDetails);
-router.post('/deleteProduct',verifyToken,Deletion);
+router.post('/deleteProduct',Deletion);
 router.get('/category',verifyToken,category);
 router.get('/staffDetails',staffNumber)
 router.get('/supplierBills',supplierBills)

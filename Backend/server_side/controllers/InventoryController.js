@@ -19,7 +19,7 @@ export const Deletion = async (req, res) => {
   }
 
   try {
-    // 1. Delete from sale_items where order_id references order_items with this product_id
+    // 1. Delete from mpesa request where order_id references order_items with this product_id
     const getOrderItemsSQL = `SELECT id FROM order_items WHERE product_id = ?`;
     const [orderItems] = await pool.query(getOrderItemsSQL, [productId]);
 
@@ -31,11 +31,17 @@ export const Deletion = async (req, res) => {
       await pool.query(deleteSaleItemsSQL, [orderItemIds]);
     }
 
-    // 2. Delete from order_items
+    // 2. Delete from order_items where product_id = ?
     const deleteOrderItemsSQL = `DELETE FROM ORDER_ITEMS WHERE product_id = ?`;
     await pool.query(deleteOrderItemsSQL, [productId]);
+    // 3. Delete from mpesa_request where product_id = ?
+    const deleteMpesaRequestSQL = `DELETE FROM mpesa_request WHERE productId = ?`;
+    await pool.query(deleteMpesaRequestSQL, [productId]);
+    // 3. Delete from shoping_cart where product_id = ?l
+    const deleteShoppingCartSQL = `DELETE FROM shoping_cart WHERE product_id = ?`;
+    await pool.query(deleteShoppingCartSQL, [productId]);
 
-    // 3. Delete the product itself
+    // 4. Delete the product itself
     const deleteProductSQL = `DELETE FROM products WHERE products_id = ?`;
     const [deletes] = await pool.query(deleteProductSQL, [productId]);
 
@@ -43,7 +49,7 @@ export const Deletion = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    res.status(201).json({ message: "Product and related records deleted successfully." });
+    res.status(201).json({ message: "success" });
   } catch (error) {
     console.error("SQL error:", error.message);
     res.status(400).json({ message: error.message });
