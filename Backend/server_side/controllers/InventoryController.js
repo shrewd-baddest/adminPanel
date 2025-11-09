@@ -32,12 +32,12 @@ export const Deletion = async (req, res) => {
     }
 
     // 2. Delete from order_items where product_id = ?
-    const deleteOrderItemsSQL = `DELETE FROM ORDER_ITEMS WHERE product_id = ?`;
+    const deleteOrderItemsSQL = `DELETE FROM order_items WHERE product_id = ?`;
     await pool.query(deleteOrderItemsSQL, [productId]);
     // 3. Delete from mpesa_request where product_id = ?
     const deleteMpesaRequestSQL = `DELETE FROM mpesa_request WHERE productId = ?`;
     await pool.query(deleteMpesaRequestSQL, [productId]);
-    // 3. Delete from shoping_cart where product_id = ?l
+    // 3. Delete from shoping_cart where product_id = ?
     const deleteShoppingCartSQL = `DELETE FROM shoping_cart WHERE product_id = ?`;
     await pool.query(deleteShoppingCartSQL, [productId]);
 
