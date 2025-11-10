@@ -37,9 +37,9 @@ CREATE TABLE products(
     stock INT(10),
     image_url VARCHAR(1000),
       category_id INT,  -- Add this line to define the FK column
-FOREIGN KEY(categories_id) REFERENCES category(category_id));
+FOREIGN KEY(categories_id) REFERENCES category(category_id)
 FOREIGN KEY (supplyer_item_id) REFERENCES supplier_items(supplyer_item_id),
-
+);
 CREATE TABLE ORDERS(
   id int AUTO_INCREMENT primary KEY,
    user_id int,

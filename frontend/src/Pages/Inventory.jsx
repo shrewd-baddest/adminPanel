@@ -41,6 +41,7 @@ if (blurs.current){
   }
   
   const okDelete = async () => {
+    console.log(productToDelete);
     try {
       const res = await axios.post(
         'https://adminpanel-8j8g.onrender.com/pages/deleteProduct',
