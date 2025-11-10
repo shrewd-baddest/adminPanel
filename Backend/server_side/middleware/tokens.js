@@ -10,7 +10,7 @@ import jwt from "jsonwebtoken";
   }
 
   const token = authHeader.split(" ")[1];
-  console.log("Token:", token);
+  // console.log("Token:", token);
    try {
 
 const decoded = jwt.verify(token, process.env.SECRET_KEY);

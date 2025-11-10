@@ -7,7 +7,12 @@ cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
     api_secret: process.env.CLOUDINARY_API_SECRET,
       api_key:process.env.CLOUDINARY_API_KEY,
-});
+})
+
+cloudinary.api
+  .ping()
+  .then(() => console.log("Cloudinary configured successfully"))
+  .catch((err) => console.error("Error configuring Cloudinary:", err));
 
 const storage = new CloudinaryStorage({
     cloudinary: cloudinary,

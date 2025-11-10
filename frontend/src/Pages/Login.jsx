@@ -60,15 +60,7 @@ backgroundSize: 'cover',
     }
   });
 
-// useEffect(() => {
-//   const btn = butt.current;
-//   btn.addEventListener('mouseover', hoover);
-//   btn.addEventListener('mouseout', hoover);
-//   return () => {
-//     btn.removeEventListener('mouseover', hoover);
-//     btn.removeEventListener('mouseout', hoover);
-//   };
-// }, []);
+ 
   const Login = (e) => {
     e.preventDefault();
     const ddata = {
