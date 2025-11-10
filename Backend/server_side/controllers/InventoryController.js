@@ -12,6 +12,7 @@ res.status(400).json({ message: error.message });    }
 }
 
 export const Deletion = async (req, res) => {
+  console.log("Delete request received with body:", req.body);
   const { productId } = req.body;
 
   if (!productId) {
@@ -27,7 +28,7 @@ export const Deletion = async (req, res) => {
     const placeholder=orderItemIds.map(()=>'?').join(',');
     if (orderItemIds.length > 0) {
       // Delete from sale_items
-      const deleteSaleItemsSQL = `DELETE FROM sale_items WHERE order_id IN ${placeholder}`;
+      const deleteSaleItemsSQL = `DELETE FROM sale_items WHERE order_id IN (${placeholder})`;
       await pool.query(deleteSaleItemsSQL, [orderItemIds]);
     }
 

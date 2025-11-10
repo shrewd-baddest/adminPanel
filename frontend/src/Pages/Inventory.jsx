@@ -47,9 +47,10 @@ if (blurs.current){
         'https://adminpanel-8j8g.onrender.com/pages/deleteProduct',
         { productId: productToDelete },
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
         }
       );
       console.log(res)
