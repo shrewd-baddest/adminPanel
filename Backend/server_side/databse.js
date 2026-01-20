@@ -11,7 +11,7 @@ const { Pool } = psql;
 //   port: process.env.DB_PORT || 5432
 // };
 
-const db = new Pool({
+const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
