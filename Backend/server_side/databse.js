@@ -1,17 +1,20 @@
- import dotenv from 'dotenv';
+import dotenv from 'dotenv';
 dotenv.config();
 import psql from 'pg';
 const { Pool } = psql;
- 
-const dbConfig = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-  port: process.env.DB_PORT || 5432
-};
 
-const pool = new Pool(dbConfig);
+// const dbConfig = {
+//   host: process.env.DB_HOST,
+//   user: process.env.DB_USER,
+//   password: process.env.DB_PASSWORD,
+//   database: process.env.DB_NAME,
+//   port: process.env.DB_PORT || 5432
+// };
+
+const db = new Pool({
+  connectionString: process.env.DATABASE_URL
+});
+
 pool.on('connect', () => {
   console.log('Connected to PostgreSQL database');
 });
