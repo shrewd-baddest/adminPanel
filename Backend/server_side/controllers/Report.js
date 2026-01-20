@@ -12,13 +12,13 @@ export const revenue = async (req, res) => {
   `;
 
   try {
-    const [[salaryRows], [supplierRows]] = await Promise.all([
+    const [salaryRows, supplierRows] = await Promise.all([
       pool.query(sql1),
       pool.query(sql2),
     ]);
 
-const staffPayment = parseInt(salaryRows[0].staffPayment || 0);
-    const supplierPayments =parseInt(supplierRows[0].supplierPayments || 0);
+const staffPayment = parseInt(salaryRows.rows[0].staffPayment || 0);
+    const supplierPayments =parseInt(supplierRows.rows[0].supplierPayments || 0);
 
     const totalRevenue = staffPayment + supplierPayments;
 
@@ -46,8 +46,8 @@ INNER JOIN products pr ON pr. products_id= si.product_id
 INNER JOIN person p ON p.ID = o.user_id
 ORDER BY p.ID, o.id;`
 try {
-  const [results]=await pool.query(sql)
-res.status(200).json(results)
+  const results=await pool.query(sql)
+res.status(200).json(results.rows)
 } catch (error) {
      res.status(500).json({ message: error.message });
 }
@@ -64,9 +64,9 @@ export const salesTrends = async (req, res) => {
   `;
 
   try {
-    const [results] = await pool.query(sql);
+    const results = await pool.query(sql);
 
-     const formatted = results.map(item => {
+     const formatted = results.rows.map(item => {
       const date = new Date(item.sale_date);
       return {
         sale_date: date.toISOString().split('T')[0], // YYYY-MM-DD
@@ -88,8 +88,8 @@ export const productTypes=async(req,res)=>{
   join category c on p.category_id = c.category_id
   group by c.category_name;`
   try {
-    const [results]=await pool.query(sql)
-    res.status(200).json(results)
+    const results=await pool.query(sql)
+    res.status(200).json(results.rows)
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

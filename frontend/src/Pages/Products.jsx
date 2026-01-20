@@ -35,7 +35,7 @@ const fields=[image,weight,categoryId,stock,price,productName,supplierId];
  
 if(fields.some(item=>{item.trim=='' || item==0 || item==null})){
   alert('fill all the fields');
-  return;
+  return; 
 }
 const formData=new FormData;
 formData.append('image',image);

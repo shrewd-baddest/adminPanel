@@ -8,8 +8,8 @@ import verifyToken from '../middleware/tokens.js';
 import { category } from '../controllers/AddProducts.js';
 import {staffNumber} from '../controllers/Staff.js'
 import { searchProduct } from '../controllers/Search.js';
-import {revenue} from '../controllers/Report.js'
-import {salesReport,salesTrends,productTypes} from '../controllers/Report.js'
+import {revenue} from '../controllers/Report.js';
+import {salesReport,salesTrends,productTypes} from '../controllers/Report.js';
 import { getSettings } from '../controllers/SettingsController.js';
 import { getNotifications } from '../controllers/Notification.js';
 import { customersDetails } from '../controllers/Customers.js';

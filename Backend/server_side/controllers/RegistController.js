@@ -15,7 +15,7 @@ const { staffName, id, role, payment,password,amount ,email} = req.body;
     }
     try {
         const sql = `INSERT INTO users (id,name,email,password,passport,number,amount,status,role)
-                     VALUES (?, ?, ?, ?, ?,?,?,?,?);`
+                     VALUES ($1, $2, $3, $4, $5,$6,$7,$8,$9);`
         const hashedpassword = await bcrypt.hash(password, 10);
         const params = [id,staffName,email,hashedpassword,passport,payment,amount,'unpaid',role ];
         await pool.query(sql, params);

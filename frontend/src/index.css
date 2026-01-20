@@ -1,3 +1,11 @@
  @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+input{
+    @apply bg-neutral-600 text-center font-semibold text-gray-950;
+}
+
+
+}

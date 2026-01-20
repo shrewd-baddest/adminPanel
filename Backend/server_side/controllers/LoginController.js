@@ -10,12 +10,12 @@ import jwt from "jsonwebtoken";
     // Check if user exists
     let user;
     if(!Email){
-    const [rows] = await pool.query('SELECT * FROM users  WHERE email = ?', [Emaili]);
-    if (rows.length === 0) {
+    const rows = await pool.query('SELECT * FROM users  WHERE email = $1', [Emaili]);
+    if (rows.rows.length === 0) {
       return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-  user = rows[0];
+  user = rows.rows[0];
      // Compare password
     const isMatch = await bcrypt.compare(Code, user.password);
     if (!isMatch) {
@@ -23,12 +23,12 @@ import jwt from "jsonwebtoken";
     }}
   
     else if(Email){
-        const [rows] = await pool.query('SELECT * FROM users WHERE email = ?', [Email]);
-    if (rows.length === 0) {
+        const rows = await pool.query('SELECT * FROM users WHERE email = $1', [Email]);
+    if (rows.rows.length === 0) {
       return res.status(401).json({ message: 'Invalid email try the other way' });
     }
      
-  user = rows[0];  
+  user = rows.rows[0];  
     }
 
     // Generate JWT token

@@ -1,0 +1,3 @@
+- [x] Convert category function to PostgreSQL syntax
+- [x] Convert supplierItems function to PostgreSQL syntax
+- [x] Convert supplierBills function to PostgreSQL syntax
