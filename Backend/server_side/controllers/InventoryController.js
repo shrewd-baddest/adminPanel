@@ -28,7 +28,7 @@ export const Deletion = async (req, res) => {
     const placeholder=orderItemIds.map((_, i)=>`$${i + 1}`).join(',');
     if (orderItemIds.length > 0) {
       // Delete from sale_items
-      const deleteSaleItemsSQL = `DELETE FROM sale_items WHERE order_id IN (${placeholder})`;
+      const deleteSaleItemsSQL = `DELETE FROM sale_items WHERE order_item_id IN (${placeholder})`;
       await pool.query(deleteSaleItemsSQL, orderItemIds);
     }
 
