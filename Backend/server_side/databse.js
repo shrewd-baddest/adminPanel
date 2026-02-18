@@ -12,11 +12,15 @@ const { Pool } = psql;
 // };
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL,
+   ssl: {
+    rejectUnauthorized: false,  // important for Render external DB
+  },
 });
 
 pool.on('connect', () => {
   console.log('Connected to PostgreSQL database');
+  
 });
 
 export default pool;

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "express-rate-limit": "^8.2.1",
     "react": "^19.1.0",
     "router": "^2.2.0"
   }
